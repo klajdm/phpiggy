@@ -1,14 +1,16 @@
 <?php
 
-declare(strict_types= 1);
+declare(strict_types=1);
 
 namespace Framework;
 
-class App {
+class App
+{
 
     private Router $router;
 
-    public function __construct() {
+    public function __construct()
+    {
         $this->router = new Router();
     }
 
@@ -22,6 +24,6 @@ class App {
 
     public function get(string $path, array $controller)
     {
-        $this->router->add('GET',$path, $controller);
+        $this->router->add('GET', $path, $controller);
     }
 }
