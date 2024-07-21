@@ -15,8 +15,13 @@ class ValidationExceptionMiddleware implements MiddlewareInterface
         try {
             $next();
         } catch (ValidationException $e) {
+            $oldFormData = $_POST;
+
+            $excludedFields = ['password, confirmPassword'];
+            $formattedFormData = array_diff_key($oldFormData, array_flip($excludedFields));
+
             $_SESSION['errors'] = $e->errors;
-            $_SESSION['oldFormData'] = $_POST;
+            $_SESSION['oldFormData'] = $formattedFormData;
 
             $referer = $_SERVER['HTTP_REFERER'];
             redirectTo($referer);
