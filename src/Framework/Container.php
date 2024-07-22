@@ -69,7 +69,7 @@ class Container
         }
 
         $factory = $this->definitions[$id];
-        $dependency = is_callable($factory) ? $factory() : $factory;
+        $dependency = is_callable($factory) ? $factory($this) : $factory;
 
         $this->resolved[$id] = $dependency;
 
